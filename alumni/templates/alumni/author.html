@@ -1,0 +1,16 @@
+{% extends "alumni/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ objects.mentor.image.url }}">
+        <div class="media-body">
+          <h2 style="color:indigo">Name: {{ objects.author }}</h2>
+          <h4 style="color:indigo">Email Id: {{ objects.author.email_id }}</h4>
+          <h4 style="color:indigo">Status: {{ objects.author.status }}</h4>
+          <h4 style="color:indigo">Contact Number: {{ objects.author.mobile_no }} </h4>
+          <h4 style="color:indigo">Currently At: {{ objects.author.current_year}}</h4>
+          </p>
+        </div>
+      </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'alumni/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <form method="POST" action=''>{% csrf_token %}
+        {{ form|crispy }}
+        <hr />
+        <button class='btn btn-primary' type='submit'>Submit</button>
+    </form>
+
+{% endblock %}

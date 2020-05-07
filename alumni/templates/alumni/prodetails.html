@@ -1,0 +1,37 @@
+{% extends 'alumni/base.html' %}
+{% block content %}
+<div class='card'>
+    <div class='card-title'>
+        <h4 style="text-align: center;">{{ objects.title }}</h4>
+    </div>
+    <div class='card-body'><h4 style="color: midnightblue;">Description</h4><p>{{ objects.description }}</p>
+        <h4><font style="color:midnightblue;">Technology stack:</font></h4><h6><font style="color: forestgreen;">{{ objects.tech_stack }}</h6></font>
+        <h4 style="color: midnightblue;">Working SS</h4><img height="400" width="700" src="{{ objects.working_ss.url }}" /> 
+        <h4 style="color: midnightblue;">Team Members:</h4><h6>{{ objects.student1 }}</h6>
+        <h6>{{ objects.student2 }}</h6>
+        <h6>{{ objects.student3 }}</h6>
+        {% for mentor in objects.mentor.all %}
+        <h4 style="color: midnightblue;">Mentored By:</h4>
+            <a href="{% url 'mentors' objects.id %}"><h6>{{ mentor }}</h6></a>
+        {% endfor %}
+        {% if pro.status == 'alumni'  %}
+            {% if objects.mentor.count == 0 %}
+                <form method='POST' action=''>{% csrf_token %}
+                <button class='btn btn-primary'>Mentor this Project</button>
+            {% else %}
+            {% for mentor in objects.mentor.all %}
+            {% if request.user|stringformat:"s" == mentor|stringformat:"s" %}
+                    <form method="POST" action="">{% csrf_token %}
+                <button class='bn btn-outline-danger'>Cancel mentorship</button>
+                </form>
+            {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+        {% if  request.user|stringformat:"s" == objects.student3|stringformat:"s" or request.user|stringformat:"s" == objects.student2|stringformat:"s" or request.user|stringformat:"s" == objects.student1|stringformat:"s" %}
+        <a class="btn btn-warning" href="{% url 'proupdate' objects.id %}">Update Details</a>
+        <a class="btn btn-outline-danger" href="{% url 'prodelete' objects.id %}">Delete</a>
+        {% endif %}
+    </div> 
+</div>
+{% endblock %}

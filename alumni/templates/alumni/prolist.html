@@ -1,0 +1,43 @@
+{% extends 'alumni/base.html' %}
+
+{% block content %}
+<div class="container">
+    <form class="form-inline" action="" method="GET">
+    {{ form }}
+    <button class="btn" type="submit">Search</button>
+  </fieldset>
+  </form>
+</div>
+<hr />
+{% for post in posts %}
+<article class="media content-section">
+  <div class="media-body">
+    <div class="article-metadata">
+      <a class="mr-2" href="#">{{ post.student1 }}</a>
+    </div>
+    <h2><a class="article-title" href="{% url 'prodetails' post.id %}">{{ post.title }}</a></h2>
+   <h6> mentored by: {% for mentor in post.mentor.all %}</h6> <h6 style="color:darkmagenta">{{ mentor }}</h6>{% endfor %}
+  </div>
+</article>
+{% endfor %}
+{% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+      {% endif %}
+{% endblock %}

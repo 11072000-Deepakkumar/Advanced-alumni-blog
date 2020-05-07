@@ -1,0 +1,23 @@
+{% extends "alumni/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        {% for mentor in objects.mentor.all %}
+        <img class="rounded-circle account-img" src="{{ mentor.image.url }}">
+        <div class="media-body">
+          
+          <h2 style="color:indigo">Name: {{ mentor }}</h2>
+          <h4 style="color:indigo">Email Id: {{ mentor.email_id }}</h4>
+          <h4 style="color:indigo">Status: {{ mentor.status }}</h4>
+          <h4 style="color:indigo">Contact Number: {{ mentor.mobile_no }} </h4>
+          <h4 style="color:indigo">Currently At: {{ mentor.current_year}}</h4>
+          <hr />
+          <h6 style="color:sienna;"><b>A short Note about Myself</b></h6>
+          <hr />
+          <p>{{ mentor.short_note_about_yourself }}</p>
+          {% endfor %}
+        </div>
+      </div>
+{% endblock %}
+     

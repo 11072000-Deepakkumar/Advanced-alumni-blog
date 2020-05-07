@@ -1,0 +1,20 @@
+{% extends 'alumni/base.html' %}
+{% block content %}
+
+<div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ object.image.url }}">
+      <div class="media-body">
+        <h2 class="account-heading">{{ object.user }}</h2>
+        <h6 class="text-secondary">Email id : {{ object.email_id }}</h6><br>
+            <h6>Currently :{{ object.status }}</h6>
+           <h6>Contact Number : {{ object.mobile_no }} </h6>
+            <h6>Current Year : {{ object.current_year}}</h6>
+            <hr />
+            <h6 style="color:sienna;"><b>A short Note about Myself</b></h6>
+              <hr />
+              <p>{{ pro.short_note_about_yourself }}</p>
+        </p>
+      </div>
+    </div>
+{% endblock %}
